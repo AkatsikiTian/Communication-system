@@ -21,9 +21,10 @@ public class FilterDemo implements Filter {
         Object user = session.getAttribute("username");
         String requestURL = req.getRequestURL().toString();
         for (String url: urls) {
-            requestURL.contains(url);
-            filterChain.doFilter(servletRequest,servletResponse);
-            return;
+            if(requestURL.contains(url)){
+                filterChain.doFilter(servletRequest,servletResponse);
+                return;
+            }
         }
         if (user!=null){
             filterChain.doFilter(servletRequest,servletResponse);
